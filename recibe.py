@@ -30,11 +30,14 @@ timestamp = None
 print("Listening for codes on GPIO " + str(args.gpio))
 while True:
     code = rfdevice.rx_code
+    length = rfdevice.rx_pulselength
+    proto = rfdevice.rx_proto
     if rfdevice.rx_code_timestamp != timestamp:
         timestamp = rfdevice.rx_code_timestamp
         #code = rfdevice.rx_code
-        print (code)
+        print (code, length, proto)
         if  (code)  in sensorAlertCodes:
             print ("MATCH")
-    time.sleep(0.01)
+            time.sleep(1)
+    time.sleep(0.1)
 rfdevice.cleanup()
